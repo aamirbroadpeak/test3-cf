@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchase_order_details">
+        <t t-call="web.html_container">
+            <t>
+                <div class="page" style="font-family: Arial, Helvetica, sans-serif;">
+                    <h1 align="center">Purchase Order Report</h1>
+                    <h4>From
+                        <span t-esc="forms_data['date_from']"/>
+                        to
+                        <span t-esc="forms_data['date_to']"/>
+                    </h4>
+                    <style>
+                        #custom_voucher {
+                        border-collapse: collapse;
+                        font-size:17px;
+                        width:100%;
+                        }
+                        #custom_voucher th, #custom_voucher td {
+                        padding-top: 10px;
+                        text-align: right;
+                        padding-bottom: 10px;
+                        }
+                        #custom_voucher tr, #custom_voucher th{
+                        border-bottom: 1px solid #ddd;
+                        }
+                    </style>
+                    <table id="custom_voucher">
+                        <thead>
+                            <tr>
+                                <th><span style="float: left;">S.No.</span></th>
+                                <th><span style="float: left;">Product</span></th>
+                                <th>Order Qty</th>
+                                <th>Received Qty</th>
+                                <th>Unit Price</th>
+                                <th>Untax Amount</th>
+                                <th>Tax Amount</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="po_orders" t-as="l">
+                                <td class="text-center" style="text-align: center !important;">
+                                        <strong>PO No.</strong>
+                                        <span t-esc="l[0]"/>
+                                </td>
+                                <td>
+                                    <t t-set="received_total" t-value="0"/>
+                                    <t t-set="total" t-value="0"/>
+                                    <tr t-foreach="l[1]" t-as="o">
+                                        <td>
+                                            <span style="float: left;">   <span t-esc="o_index + 1"/></span>
+                                        </td>
+                                        <td>
+                                            <span style="float: left;">
+                                            <span t-esc="o['name']"/>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:,}'.format(round(o['product_qty']))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:,}'.format(round(o['qty_received']))"/>
+                                            <t t-set="received_total" t-value="received_total+o['qty_received']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:,}'.format(round(o['price_unit']))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:,}'.format(round(o['amount']))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:,}'.format(round(o['tax']))"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:,}'.format(round(o['amount']+o['tax']))"/>
+                                            <t t-set="total" t-value="total+o['amount']+o['tax']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span style="float: left;"> <b>Total</b></span>
+                                        </td>
+                                        <td colspan="3">
+                                                <span t-esc="'{:,}'.format(round(received_total))"/>
+                                        </td>
+                                        <td colspan="4">
+                                            <span>
+                                                <span t-esc="'{:,}'.format(round(total))"/>
+                                                Rs.
+                                            </span>
+                                        </td>
+
+                                    </tr>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<record id="cf_sale_report_inherit" model="ir.ui.view">
+            <field name="name">sale.report.inherit</field>
+            <field name="model">sale.report</field>
+            <field name="inherit_id" ref="sale.view_order_product_pivot"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price_subtotal']" position="after">
+                <field name="tax_total" />
+                </xpath>
+            </field>
+        </record>
+    </odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <menuitem
+            name="Purchase Report"
+            action="action_report_purchase_order"
+            id="menu_purchase_order_report"
+            sequence="1"
+            parent="purchase.purchase_report_main">
+        </menuitem>
+</odoo>
+
+
