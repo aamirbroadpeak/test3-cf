@@ -21,12 +21,12 @@
 
     # always loaded
     'data': [
-        'security\ir.model.access.csv',
-        'views\sale_report_inherit.xml',
-        'views\purchase_report_inherit.xml',
-        'wizard\purchase_order_wizard_view.xml',
-        'views\purchase_order_menu.xml',
-        'report\cf_reports.xml',
-        'report\purchase_order_details.xml',
+        'security/ir.model.access.csv',
+        'views/sale_report_inherit.xml',
+        'views/purchase_report_inherit.xml',
+        'wizard/purchase_order_wizard_view.xml',
+        'views/purchase_order_menu.xml',
+        'report/cf_reports.xml',
+        'report/purchase_order_details.xml',
     ],
 }
